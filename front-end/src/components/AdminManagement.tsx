@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,12 +28,6 @@ const AdminManagement = () => {
     { id: 3, name: "Paint Protection", price: "$449", duration: "4-6 hours", image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80" },
   ]);
 
-  const [accessories, setAccessories] = useState([
-    { id: 1, name: "Premium Steering Wheel Cover", price: "$65", stock: 15, image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=300&q=80" },
-    { id: 2, name: "All-Weather Floor Mats", price: "$125", stock: 8, image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=300&q=80" },
-    { id: 3, name: "Dashboard Phone Mount", price: "$49", stock: 25, image: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=300&q=80" },
-  ]);
-
   const [galleryEntries, setGalleryEntries] = useState([
     {
       id: 1,
@@ -56,14 +49,6 @@ const AdminManagement = () => {
     image: "",
   });
 
-  const [newAccessory, setNewAccessory] = useState({
-    name: "",
-    price: "",
-    stock: "",
-    description: "",
-    image: "",
-  });
-
   const [newGalleryEntry, setNewGalleryEntry] = useState({
     title: "",
     description: "",
@@ -77,12 +62,6 @@ const AdminManagement = () => {
     { id: 1, customer: "John Smith", service: "Premium Wash & Wax", date: "2024-01-15", status: "Confirmed", phone: "+61 400 111 222" },
     { id: 2, customer: "Sarah Johnson", service: "Interior Detailing", date: "2024-01-16", status: "Pending", phone: "+61 400 333 444" },
     { id: 3, customer: "Mike Wilson", service: "Paint Protection", date: "2024-01-17", status: "Completed", phone: "+61 400 555 666" },
-  ];
-
-  const accessoryOrders = [
-    { id: 1, customer: "Emma Davis", items: "Steering Cover, Floor Mats", total: "$190", status: "Delivered", type: "Accessories Only" },
-    { id: 2, customer: "Tom Brown", items: "Phone Mount", total: "$49", status: "Processing", type: "Accessories + Detailing" },
-    { id: 3, customer: "Lisa White", items: "Floor Mats Set", total: "$125", status: "Shipped", type: "Accessories Only" },
   ];
 
   const customerRecords = [
@@ -103,23 +82,6 @@ const AdminManagement = () => {
       toast({
         title: "Service Added!",
         description: "New service has been added successfully.",
-      });
-    }
-  };
-
-  const handleAddAccessory = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newAccessory.name && newAccessory.price) {
-      const accessory = {
-        id: accessories.length + 1,
-        ...newAccessory,
-        stock: parseInt(newAccessory.stock) || 0,
-      };
-      setAccessories([...accessories, accessory]);
-      setNewAccessory({ name: "", price: "", stock: "", description: "", image: "" });
-      toast({
-        title: "Accessory Added!",
-        description: "New accessory has been added successfully.",
       });
     }
   };
@@ -149,14 +111,6 @@ const AdminManagement = () => {
     });
   };
 
-  const handleDeleteAccessory = (id: number) => {
-    setAccessories(accessories.filter(accessory => accessory.id !== id));
-    toast({
-      title: "Accessory Deleted!",
-      description: "Accessory has been removed successfully.",
-    });
-  };
-
   const handleDeleteGalleryEntry = (id: number) => {
     setGalleryEntries(galleryEntries.filter(entry => entry.id !== id));
     toast({
@@ -168,7 +122,6 @@ const AdminManagement = () => {
   const tabs = [
     { id: "dashboard", name: "Dashboard", icon: <Settings className="h-4 w-4" /> },
     { id: "services", name: "Services", icon: <Car className="h-4 w-4" /> },
-    { id: "accessories", name: "Accessories", icon: <Package className="h-4 w-4" /> },
     { id: "bookings", name: "Bookings", icon: <Calendar className="h-4 w-4" /> },
     { id: "gallery", name: "Gallery", icon: <ImageIcon className="h-4 w-4" /> },
     { id: "customers", name: "Customers", icon: <Users className="h-4 w-4" /> },
@@ -501,119 +454,6 @@ const AdminManagement = () => {
           </div>
         )}
 
-        {/* Accessories Tab */}
-        {activeTab === "accessories" && (
-          <div className="grid lg:grid-cols-2 gap-8">
-            <Card className="border-border">
-              <CardHeader>
-                <CardTitle className="flex items-center text-foreground">
-                  <Plus className="h-5 w-5 mr-2" />
-                  Add New Accessory
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleAddAccessory} className="space-y-4">
-                  <div>
-                    <Label htmlFor="accessoryName" className="text-foreground">Accessory Name</Label>
-                    <Input
-                      id="accessoryName"
-                      value={newAccessory.name}
-                      onChange={(e) => setNewAccessory({ ...newAccessory, name: e.target.value })}
-                      placeholder="e.g. Premium Floor Mats"
-                      className="border-border"
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="accessoryPrice" className="text-foreground">Price</Label>
-                    <Input
-                      id="accessoryPrice"
-                      value={newAccessory.price}
-                      onChange={(e) => setNewAccessory({ ...newAccessory, price: e.target.value })}
-                      placeholder="e.g. $65"
-                      className="border-border"
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="accessoryStock" className="text-foreground">Stock Quantity</Label>
-                    <Input
-                      id="accessoryStock"
-                      type="number"
-                      value={newAccessory.stock}
-                      onChange={(e) => setNewAccessory({ ...newAccessory, stock: e.target.value })}
-                      placeholder="e.g. 10"
-                      className="border-border"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="accessoryImage" className="text-foreground">Image URL</Label>
-                    <Input
-                      id="accessoryImage"
-                      value={newAccessory.image}
-                      onChange={(e) => setNewAccessory({ ...newAccessory, image: e.target.value })}
-                      placeholder="https://example.com/image.jpg"
-                      className="border-border"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="accessoryDescription" className="text-foreground">Description</Label>
-                    <Textarea
-                      id="accessoryDescription"
-                      value={newAccessory.description}
-                      onChange={(e) => setNewAccessory({ ...newAccessory, description: e.target.value })}
-                      placeholder="Accessory description..."
-                      className="border-border"
-                    />
-                  </div>
-                  
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    Add Accessory
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border">
-              <CardHeader>
-                <CardTitle className="text-foreground">Current Accessories</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {accessories.map((accessory) => (
-                    <div key={accessory.id} className="flex items-center justify-between p-4 border border-border rounded-lg">
-                      <div>
-                        <h3 className="font-semibold text-foreground">{accessory.name}</h3>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <Badge variant="outline" className="border-border">{accessory.price}</Badge>
-                          <Badge variant="secondary">Stock: {accessory.stock}</Badge>
-                        </div>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button variant="outline" size="sm" className="border-border">
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          onClick={() => handleDeleteAccessory(accessory.id)}
-                          className="text-red-600 hover:text-red-700 border-border"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
         {/* Bookings Tab */}
         {activeTab === "bookings" && (
           <div className="space-y-6">
@@ -639,37 +479,6 @@ const AdminManagement = () => {
                         className="mt-2 md:mt-0 self-start md:self-center"
                       >
                         {booking.status}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border">
-              <CardHeader>
-                <CardTitle className="text-foreground">Accessory Orders</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {accessoryOrders.map((order) => (
-                    <div key={order.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 border border-border rounded-lg">
-                      <div>
-                        <h3 className="font-semibold text-foreground">{order.customer}</h3>
-                        <p className="text-sm text-muted-foreground">{order.items}</p>
-                        <p className="text-sm text-muted-foreground">Total: {order.total}</p>
-                        <Badge variant="outline" className="mt-1 border-border">
-                          {order.type}
-                        </Badge>
-                      </div>
-                      <Badge 
-                        variant={
-                          order.status === "Delivered" ? "default" :
-                          order.status === "Processing" ? "secondary" : "outline"
-                        }
-                        className="mt-2 md:mt-0 self-start md:self-center"
-                      >
-                        {order.status}
                       </Badge>
                     </div>
                   ))}

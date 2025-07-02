@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -41,37 +40,6 @@ const Index = () => {
       description: "Professional ceramic coating for ultimate paint protection and shine",
       price: "$449 AUD",
       image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=400&q=80"
-    }
-  ];
-
-  const popularAccessories = [
-    {
-      id: "ACC001",
-      name: "Premium Leather Steering Wheel Cover",
-      price: 65,
-      image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=300&q=80",
-      rating: 4.8
-    },
-    {
-      id: "ACC002",
-      name: "All-Weather Floor Mats Set",
-      price: 125,
-      image: "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=300&q=80",
-      rating: 4.9
-    },
-    {
-      id: "ACC003",
-      name: "Dashboard Phone Mount",
-      price: 49,
-      image: "https://images.unsplash.com/photo-1556742111-a301076d9d18?auto=format&fit=crop&w=300&q=80",
-      rating: 4.7
-    },
-    {
-      id: "ACC004",
-      name: "Car Air Freshener Set",
-      price: 35,
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=300&q=80",
-      rating: 4.6
     }
   ];
 
@@ -213,57 +181,6 @@ const Index = () => {
             <Button asChild variant="outline" size="lg" className="rounded-full">
               <Link to="/services">
                 View All Services
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Popular Accessories Section */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Popular Accessories</h2>
-            <p className="text-xl text-muted-foreground">Premium accessories to enhance your driving experience</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {popularAccessories.map((accessory) => (
-              <Card key={accessory.id} className="hover:shadow-lg transition-all duration-300 hover-scale border-border">
-                <div className="relative h-40 overflow-hidden">
-                  <img 
-                    src={accessory.image} 
-                    alt={accessory.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2 line-clamp-2 text-foreground">{accessory.name}</h3>
-                  <div className="flex items-center mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        className={`h-4 w-4 ${i < Math.floor(accessory.rating) ? 'text-yellow-400 fill-current' : 'text-muted-foreground'}`} 
-                      />
-                    ))}
-                    <span className="text-sm text-muted-foreground ml-1">({accessory.rating})</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-foreground">${accessory.price} AUD</span>
-                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
-                      <ShoppingCart className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button asChild variant="outline" size="lg" className="rounded-full">
-              <Link to="/accessories">
-                View All Accessories
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

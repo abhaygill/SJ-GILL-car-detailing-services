@@ -1,4 +1,3 @@
-
 import { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -30,13 +29,12 @@ const Layout = ({ children }: LayoutProps) => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
-    { name: "Accessories", path: "/accessories" },
     { name: "Gallery", path: "/gallery" },
     { name: "Contact", path: "/contact" },
   ];
 
   const handleProtectedNavigation = (path: string) => {
-    if (!user && (path === "/booking" || path === "/accessories")) {
+    if (!user && path === "/booking") {
       return "/login";
     }
     return path;
@@ -214,7 +212,7 @@ const Layout = ({ children }: LayoutProps) => {
               <span className="text-[8px] italic text-white relative top-[5px] tracking-wide">car detailing services</span>
               </div>
               <p className="text-slate-400">
-                Professional car detailing services with premium accessories for your vehicle.
+                Professional car detailing services for your vehicle.
               </p>
             </div>
             

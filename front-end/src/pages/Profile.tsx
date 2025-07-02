@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -204,11 +203,6 @@ const Profile = () => {
                     <Link to="/services">
                       <Car className="mr-2 h-4 w-4" />
                       View Services
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="w-full">
-                    <Link to="/accessories">
-                      View Accessories
                     </Link>
                   </Button>
                 </CardContent>
